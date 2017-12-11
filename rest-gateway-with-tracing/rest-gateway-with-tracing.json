@@ -1,0 +1,54 @@
+{
+  "mashling_schema": "0.2",
+  "gateway": {
+    "name": "rest-gateway-with-tracing",
+    "version": "1.0.0",
+    "display_name":"Distributed Tracing",
+    "display_image":"displayImage.svg",
+    "description": "A microgateway with distributed tracing configured with Zipkin as the tracer",
+    "configurations": [
+      {
+        "name": "restConfig",
+        "type": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/gorillamuxtrigger",
+        "description": "Configuration for rest trigger",
+        "settings": {
+          "port": "9096",
+          "tracer": "zipkin",
+          "tracerEndpoint": "http://localhost:9411/api/v1/spans"
+        }
+      }
+    ],
+    "triggers": [
+      {
+        "name": "rest_trigger",
+        "description": "The trigger on 'pets' endpoint",
+        "type": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/gorillamuxtrigger",
+        "settings": {
+          "config": "${configurations.restConfig}",
+          "method": "GET",
+          "path": "/pets/{petId}",
+          "optimize": "true"
+        }
+      }
+    ],
+    "event_handlers": [
+      {
+        "name": "get_pet_handler",
+        "description": "Handle the user access",
+        "reference": "github.com/TIBCOSoftware/mashling/lib/flow/Tracing.json"
+      }
+    ],
+    "event_links": [
+      {
+        "triggers": [
+          "rest_trigger"
+        ],
+        "dispatches": [
+          {
+            "handler": "get_pet_handler"
+          }
+        ]
+      }
+    ]
+  }
+}
