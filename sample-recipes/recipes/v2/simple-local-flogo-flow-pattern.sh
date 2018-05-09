@@ -6,7 +6,7 @@ function get_test_cases {
 }
 function testcase1 {
 cd $GOPATH/src/github.com/TIBCOSoftware/mashling/examples/recipes/v2
-./mashling-gateway -c simple-local-flogo-flow-pattern.json > /tmp/rest1.log 2>&1 & pId=$!
+mashling-gateway -c simple-local-flogo-flow-pattern.json > /tmp/rest1.log 2>&1 & pId=$!
 sleep 15
 response=$(curl --request GET http://localhost:9096/pets/2 --write-out '%{http_code}' --silent --output /dev/null)
 kill -9 $pId
