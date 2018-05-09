@@ -5,6 +5,7 @@ function get_test_cases {
     echo "${my_list[@]}"
 }
 function testcase1 {
+cd $GOPATH/src/github.com/TIBCOSoftware/mashling
 mashling-gateway -c examples/recipes/v1/reference-gateway.json > /tmp/rest1.log 2>&1 &
 pId=$!
 sleep 15

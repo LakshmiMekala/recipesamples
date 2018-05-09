@@ -5,6 +5,7 @@ function get_test_cases {
     echo "${my_list[@]}"
 }
 function testcase1 {
+cd $GOPATH/src/github.com/TIBCOSoftware/mashling
 mashling-gateway -c examples/recipes/v1/customized-rest-conditional-gateway.json > /tmp/rest1.log 2>&1 &
 pId=$!
 sleep 15
@@ -18,6 +19,7 @@ if [ $response -eq 200  ] && [[ "echo $(cat /tmp/rest1.log)" =~ "Completed" ]]
 fi
 }
 function testcase2 {
+cd $GOPATH/src/github.com/TIBCOSoftware/mashling
 mashling-gateway -c examples/recipes/v1/customized-rest-conditional-gateway.json > /tmp/rest2.log 2>&1 &
 pId=$!
 sleep 15

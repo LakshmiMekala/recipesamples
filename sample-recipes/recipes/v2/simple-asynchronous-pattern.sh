@@ -5,6 +5,7 @@ function get_test_cases {
     echo "${my_list[@]}"
 }
 function testcase1 {
+cd $GOPATH/src/github.com/TIBCOSoftware/mashling
 mashling-gateway -c examples/recipes/v2/simple-asynchronous-pattern.json > /tmp/test1.log 2>&1 & pId=$!
 sleep 15
 mosquitto_sub -t "put" > /tmp/test.log & pId1=$!
@@ -27,6 +28,7 @@ if [[ "echo $(cat /tmp/test.log)" =~ "10" ]] && [[ "echo $(cat /tmp/test1.log)" 
 
 
 function testcase2 {
+cd $GOPATH/src/github.com/TIBCOSoftware/mashling
 mashling-gateway -c examples/recipes/v2/simple-asynchronous-pattern.json > /tmp/rest2.log 2>&1 & pId=$!
 sleep 15
 mosquitto_sub -t "put" > /tmp/test.log & pId1=$!
