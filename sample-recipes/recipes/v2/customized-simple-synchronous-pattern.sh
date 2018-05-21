@@ -5,8 +5,8 @@ function get_test_cases {
     echo "${my_list[@]}"
 }
 function testcase1 {
-cd $GOPATH/src/github.com/TIBCOSoftware/mashling
-mashling-gateway -c examples/recipes/v2/customized-simple-synchronous-pattern.json > /tmp/rest1.log 2>&1 & pId=$!
+cd $GOPATH/src/github.com/TIBCOSoftware/mashling/examples/recipes/v2/
+mashling-gateway-linux-amd64 -c customized-simple-synchronous-pattern.json > /tmp/rest1.log 2>&1 & pId=$!
 sleep 15
 response=$(curl --request GET http://localhost:9096/pets/2 --write-out '%{http_code}' --silent --output /dev/null)
 kill -9 $pId
@@ -18,8 +18,8 @@ if [ $response -eq 200  ] && [[ "echo $(cat /tmp/rest1.log)" =~ "Completed" ]]
 fi
 }
 function testcase2 {
-cd $GOPATH/src/github.com/TIBCOSoftware/mashling
-mashling-gateway -c examples/recipes/v2/customized-simple-synchronous-pattern.json > /tmp/rest2.log 2>&1 & pId=$!
+cd $GOPATH/src/github.com/TIBCOSoftware/mashling/examples/recipes/v2/
+mashling-gateway-linux-amd64 -c customized-simple-synchronous-pattern.json > /tmp/rest2.log 2>&1 & pId=$!
 sleep 15
 response=$(curl --request GET http://localhost:9096/pets/18 --write-out '%{http_code}' --silent --output /dev/null)
 kill -9 $pId
@@ -32,8 +32,8 @@ fi
 }
 
 function testcase3 {
-cd $GOPATH/src/github.com/TIBCOSoftware/mashling
-mashling-gateway -c examples/recipes/v2/customized-simple-synchronous-pattern.json > /tmp/rest3.log 2>&1 & pId=$!
+cd $GOPATH/src/github.com/TIBCOSoftware/mashling/examples/recipes/v2/
+mashling-gateway-linux-amd64 -c customized-simple-synchronous-pattern.json > /tmp/rest3.log 2>&1 & pId=$!
 sleep 15
 response=$(curl --request GET http://localhost:9096/pets/13 --write-out '%{http_code}' --silent --output /dev/null)
 curl --request GET http://localhost:9096/pets/13 > /tmp/test3.log
@@ -48,8 +48,8 @@ fi
 
 
 function testcase4 {
-cd $GOPATH/src/github.com/TIBCOSoftware/mashling
-mashling-gateway -c examples/recipes/v2/customized-simple-synchronous-pattern.json > /tmp/rest4.log 2>&1 & pId=$!
+cd $GOPATH/src/github.com/TIBCOSoftware/mashling/examples/recipes/v2/
+mashling-gateway-linux-amd64 -c customized-simple-synchronous-pattern.json > /tmp/rest4.log 2>&1 & pId=$!
 sleep 15
 response=$(curl --request GET http://localhost:9096/pets/8 --write-out '%{http_code}' --silent --output /dev/null)
 curl --request GET http://localhost:9096/pets/15 > /tmp/test4.log

@@ -23,7 +23,7 @@ mashling-gateway -c examples/recipes/v2/simple-js-service.json > /tmp/rest2.log 
 sleep 15
 response=$(curl --request GET http://localhost:9096/pets/8 --write-out '%{http_code}' --silent --output /dev/null)
 kill -9 $pId
-if [ $response -eq 403  ] && [[ "echo $(cat /tmp/rest2.log)" =~ "Completed" ]]
+if ([ $response -eq 403 ] || [ $response -eq 200 ]) && [[ "echo $(cat /tmp/rest2.log)" =~ "Completed" ]]
     then 
         echo "PASS"
     else
