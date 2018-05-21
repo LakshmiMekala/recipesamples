@@ -8,6 +8,7 @@ function testcase1 {
 cd $GOPATH/src/github.com/TIBCOSoftware/mashling/examples/recipes/v1//mashling-custom
 mashling-gateway-linux-amd64 -c customized-rest-conditional-gateway.json > /tmp/rest1.log 2>&1 &
 pId=$!
+mashling-gateway-linux-amd64 -c customized-rest-conditional-gateway.json
 sleep 15
 response=$(curl --request GET http://localhost:9096/pets/2 --write-out '%{http_code}' --silent --output /dev/null)
 kill -9 $pId
