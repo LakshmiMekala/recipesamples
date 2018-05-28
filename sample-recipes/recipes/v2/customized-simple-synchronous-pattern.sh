@@ -1,9 +1,21 @@
 #!/bin/bash 
 
 function get_test_cases {
+    init ;
     local my_list=( testcase1 testcase2 testcase3 testcase4 )
     echo "${my_list[@]}"
+    clear ;
 }
+
+function init {
+    cd $GOPATH/src/github.com/TIBCOSoftware/mashling/examples/recipes/v1
+    mashling-cli create -c "${RECIPE[$k]}".json 
+}
+
+function clear {
+    rm -rf mashilng-custom
+}
+
 function testcase1 {
 cd $GOPATH/src/github.com/TIBCOSoftware/mashling/examples/recipes/v2/mashling-custom
 ./mashling-gateway -c ../customized-simple-synchronous-pattern.json > /tmp/rest1.log 2>&1 & pId=$!

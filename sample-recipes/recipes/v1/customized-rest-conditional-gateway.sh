@@ -1,9 +1,21 @@
 #!/bin/bash 
 
 function get_test_cases {
-    local my_list=( testcase2 testcase1 )
-    echo "${my_list[@]}"
+init ;
+local my_list=( testcase2 testcase1 )
+echo "${my_list[@]}"
+clear ;
 }
+
+function init {
+cd $GOPATH/src/github.com/TIBCOSoftware/mashling/examples/recipes/v1
+mashling-cli create -c "${RECIPE[$k]}".json 
+}
+
+function clear {
+rm -rf mashilng-custom
+}
+
 function testcase1 {
 cd $GOPATH/src/github.com/TIBCOSoftware/mashling/examples/recipes/v1/mashling-custom
 ./mashling-gateway -c ../customized-rest-conditional-gateway.json > /tmp/rest1.log 2>&1 &
