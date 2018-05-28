@@ -8,12 +8,18 @@ function get_test_cases {
 }
 
 function init {
-    cd $GOPATH/src/github.com/TIBCOSoftware/mashling/examples/recipes/v1
-    mashling-cli create -c "${RECIPE[$k]}".json 
+    cd $GOPATH/src/github.com/TIBCOSoftware/mashling/examples/recipes/v2
+    mashling-cli create -c "${RECIPE[$k]}".json
+    cd mashling-custom
+    echo =++++++++++++++++++++
+    ls -ll
+    echo =++++++++++++++++++++
+    cd ..  
 }
 
 function clear {
     rm -rf mashilng-custom
+    ls -ll
 }
 
 function testcase1 {
