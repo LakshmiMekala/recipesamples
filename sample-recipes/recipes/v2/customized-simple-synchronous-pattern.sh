@@ -1,10 +1,10 @@
 #!/bin/bash 
 
 function get_test_cases {
-    # init ;
+    init ;
     local my_list=( testcase1 testcase2 testcase3 testcase4 )
     echo "${my_list[@]}"
-    # clear ;
+    clear ;
 }
 
 function init {
