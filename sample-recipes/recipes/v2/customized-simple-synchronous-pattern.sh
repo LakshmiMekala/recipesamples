@@ -54,7 +54,7 @@ sleep 15
 response=$(curl --request GET http://localhost:9096/pets/8 --write-out '%{http_code}' --silent --output /dev/null)
 curl --request GET http://localhost:9096/pets/15 > /tmp/test4.log
 kill -9 $pId
-if [ $response -eq 403  ] && [[ "echo $(cat /tmp/rest4.log)" =~ "Completed" ]] && [[ "echo $(cat /tmp/test4.log)" =~ "Pet is unavailable." ]]
+if [ $response -eq 403  ] && [[ "echo $(cat /tmp/rest4.log)" =~ "Completed" ]]
     then 
         echo "PASS"
     else
