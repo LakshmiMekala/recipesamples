@@ -10,11 +10,13 @@ clear ;
 function init {
     cd $GOPATH/src/github.com/TIBCOSoftware/mashling/examples/recipes/v1
     mashling-cli create -c "${RECIPE[$k]}".json
-    cd mashling-custom
-    echo =++++++++++++++++++++
-    ls -ll
-    echo =++++++++++++++++++++
-    cd ..  
+    if [[ "$OSTYPE" == "darwin"* ]] ;then
+        mv mashling-custom/mashling-gateway-darwin-amd64 mashling-custom/mashling-gateway
+    elif [[ "$OSTYPE" == "msys"* ]] ;then
+        mv mashling-custom/mashling-gateway-windows-amd64.exe mashling-custom/mashling-gateway.exe
+    elif [[ "$OSTYPE" == "linux-gnu"* ]] ;then
+        mv mashling-custom/mashling-gateway-linux-amd64 mashling-custom/mashling-gateway
+    fi 
 }
 
 function clear {
@@ -27,6 +29,7 @@ cd $GOPATH/src/github.com/TIBCOSoftware/mashling/examples/recipes/v1/mashling-cu
 ./mashling-gateway -c ../customized-rest-conditional-gateway.json > /tmp/rest1.log 2>&1 &
 pId=$!
 sleep 15
+./mashling-gateway -c ../customized-rest-conditional-gateway.json
 response=$(curl --request GET http://localhost:9096/pets/2 --write-out '%{http_code}' --silent --output /dev/null)
 kill -9 $pId
 if ([ $response -eq 403 ] || [ $response -eq 200 ]) && [[ "echo $(cat /tmp/rest1.log)" =~ "Completed" ]]

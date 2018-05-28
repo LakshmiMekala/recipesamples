@@ -10,11 +10,13 @@ function get_test_cases {
 function init {
     cd $GOPATH/src/github.com/TIBCOSoftware/mashling/examples/recipes/v2
     mashling-cli create -c "${RECIPE[$k]}".json
-    cd mashling-custom
-    echo =++++++++++++++++++++
-    ls -ll
-    echo =++++++++++++++++++++
-    cd ..  
+    if [[ "$OSTYPE" == "darwin"* ]] ;then
+        mv mashling-custom/mashling-gateway-darwin-amd64 mashling-custom/mashling-gateway
+    elif [[ "$OSTYPE" == "msys"* ]] ;then
+        mv mashling-custom/mashling-gateway-windows-amd64.exe mashling-custom/mashling-gateway.exe
+    elif [[ "$OSTYPE" == "linux-gnu"* ]] ;then
+        mv mashling-custom/mashling-gateway-linux-amd64 mashling-custom/mashling-gateway
+    fi  
 }
 
 function clear {
