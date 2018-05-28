@@ -21,7 +21,6 @@ function init {
 
 function clear {
     rm -rf mashilng-custom
-    ls -ll
 }
 
 function testcase1 {

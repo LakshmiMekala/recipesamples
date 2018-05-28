@@ -1,10 +1,10 @@
 #!/bin/bash 
 
 function get_test_cases {
-# init ;
+init ;
 local my_list=( testcase2 testcase1 )
 echo "${my_list[@]}"
-# clear ;
+clear ;
 }
 
 function init {
@@ -21,7 +21,6 @@ function init {
 
 function clear {
 rm -rf mashilng-custom
-ls -ll
 }
 
 function testcase1 {
